@@ -23,9 +23,9 @@ feature "User can sign in and out" do
   context "user signed in on the homepage" do
 
     it "can edit restaurant which they created" do
+      visit('/')
       user = create :user
       sign_in(user)
-      visit('/')
       click_link('Add a restaurant')
       fill_in 'Name', with: 'KFC'
       click_button 'Create Restaurant'
@@ -33,29 +33,29 @@ feature "User can sign in and out" do
     end
 
     it "cannot edit restaurants which it did not create" do
-      # visit('/')
-      # click_link('Sign up')
-      # fill_in('Email', with: 'example@example.com')
-      # fill_in('Password', with: 'testtest')
-      # fill_in('Password confirmation', with: 'testtest')
-      # click_button('Sign up')
+      visit('/')
+      user = create :user
+      sign_in(user)
+      click_link('Add a restaurant')
+      fill_in 'Name', with: 'KFC'
+      click_button 'Create Restaurant'
+      click_link 'Sign out'
       user = build :user2
       sign_up(user)
-      visit('/')
       expect(page).not_to have_link('Edit KFC')
     end
 
     it "should see 'sign out' link" do
+      visit('/')
       user = build :user
       sign_up(user)
-      visit('/')
       expect(page).to have_link('Sign out')
     end
 
     it "should not see a 'sign in' link and a 'sign up' link" do
+      visit('/')
       user = create :user
       sign_in(user)
-      visit('/')
       expect(page).not_to have_link('Sign in')
       expect(page).not_to have_link('Sign up')
     end

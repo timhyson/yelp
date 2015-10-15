@@ -2,7 +2,7 @@ class RestaurantsController < ApplicationController
   before_action :authenticate_user!, :except => [:index, :show]
 
   def index
-    # raise 'Hello from the index action'
+    @restaurants = Restaurant.all
   end
 
   def new
@@ -10,13 +10,24 @@ class RestaurantsController < ApplicationController
   end
 
   def create
-    @restaurant = Restaurant.create(restaurant_params)
+    @restaurant = current_user.restaurants.new(restaurant_params)
     if @restaurant.save
       redirect_to restaurants_path
     else
       render 'new'
     end
   end
+
+  # def create
+  #   @restaurant = Restaurant.create(restaurant_params)
+  #   if @restaurant.save
+  #     @restaurant.user_id = current_user.id
+  #     @restaurant.save
+  #     redirect_to restaurants_path
+  #   else
+  #     render 'new'
+  #   end
+  # end
 
   def restaurant_params
     params.require(:restaurant).permit(:name)
