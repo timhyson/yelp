@@ -18,17 +18,6 @@ class RestaurantsController < ApplicationController
     end
   end
 
-  # def create
-  #   @restaurant = Restaurant.create(restaurant_params)
-  #   if @restaurant.save
-  #     @restaurant.user_id = current_user.id
-  #     @restaurant.save
-  #     redirect_to restaurants_path
-  #   else
-  #     render 'new'
-  #   end
-  # end
-
   def restaurant_params
     params.require(:restaurant).permit(:name)
   end
