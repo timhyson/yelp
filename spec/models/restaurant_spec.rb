@@ -1,7 +1,9 @@
 require 'spec_helper'
 
 describe Restaurant, :type => :model do
+
   it { is_expected.to have_many :reviews }
+
   it { is_expected.to belong_to :user}
 
   it 'is not valid with a name of less than three characters' do
@@ -18,7 +20,7 @@ describe Restaurant, :type => :model do
 
   describe 'reviews' do
     describe 'build_with_user' do
-      let(:user) { User.create email: 'teset@test.com' }
+      let(:user) { User.create email: 'test@test.com' }
       let(:restaurant) { Restaurant.create name: 'Test' }
       let(:review_params) { {rating: 5, thoughts: 'yum'} }
 

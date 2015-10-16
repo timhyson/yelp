@@ -21,13 +21,12 @@ feature "User can sign in and out" do
   end
 
   context "user signed in on the homepage" do
-
     before do
       user = build :user
       sign_up(user)
     end
 
-    it "can edit restaurant which they created" do
+    it "can edit restaurants which they created" do
       visit('/')
 
       click_link('Add a restaurant')
@@ -36,8 +35,9 @@ feature "User can sign in and out" do
       expect(page).to have_link 'Edit KFC'
     end
 
-    it "cannot edit restaurants which it did not create" do
+    it "cannot edit restaurants which they did not create" do
       visit('/')
+
       click_link('Add a restaurant')
       fill_in 'Name', with: 'KFC'
       click_button 'Create Restaurant'
@@ -45,6 +45,27 @@ feature "User can sign in and out" do
       user = build :user2
       sign_up(user)
       expect(page).not_to have_link('Edit KFC')
+    end
+
+    it "can delete restaurants which they created" do
+      visit('/')
+
+      click_link('Add a restaurant')
+      fill_in 'Name', with: 'KFC'
+      click_button 'Create Restaurant'
+      expect(page).to have_link 'Delete KFC'
+    end
+
+    it "cannot delete restaurants which they did not create" do
+      visit('/')
+
+      click_link('Add a restaurant')
+      fill_in 'Name', with: 'KFC'
+      click_button 'Create Restaurant'
+      click_link 'Sign out'
+      user = build :user2
+      sign_up(user)
+      expect(page).not_to have_link('Delete KFC')
     end
 
     it "should see 'sign out' link" do
