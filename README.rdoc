@@ -1,6 +1,19 @@
 == README
 
-Wednesday's work with Sarah, views written in HTML
+Week 7 Instagram project, views written in HTML.
+
+Can be run on a server, type bin/rails server
+
+To do
+=====
+
+- average scores displayed as stars
+- error about missing image for reviews when running rspec - to investigate
+- testing required for images on reviews
+- ONCE ABOVE IS DONE... merge develop branch onto production
+
+
+
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
